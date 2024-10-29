@@ -143,7 +143,7 @@ contract Energy is ReentrancyGuard{
      * @return An array of all listings
     */
     function getAllListings() public view returns (Listing[] memory) {
-        if (listings[msg.sender].producer == address(0)) revert OnlyProducerAllowed();
+       
         Listing[] memory allListings = new Listing[](allProducerAddresses.length);
         for (uint i = 0; i < allProducerAddresses.length; i++) {
             allListings[i] = listings[allProducerAddresses[i]];
@@ -181,7 +181,7 @@ contract Energy is ReentrancyGuard{
     function addListing(uint rate, uint units, uint minorder, uint maxorder) external {
         if (msg.sender == address(0)) revert AddressZeroDetected();
         if (rate == 0 || units == 0 || minorder == 0 || maxorder == 0) revert ZeroValueNotAllowed();
-        if (listings[msg.sender].producer != address(0)) revert ProducerAlreadyRegistered();
+       
 
         uint id = allProducerAddresses.length + 1;
         listings[msg.sender].id = id;
